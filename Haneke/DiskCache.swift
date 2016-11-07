@@ -74,10 +74,11 @@ open class DiskCache {
         }
     }
 
-    open func removeData(with key: String) {
+    open func removeData(with key: String, completion: (() -> ())? = nil) {
         cacheQueue.async(execute: {
             let path = self.path(forKey: key)
             self.removeFile(atPath: path)
+            completion?()
         })
     }
     
